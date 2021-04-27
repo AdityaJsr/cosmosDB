@@ -38,14 +38,11 @@ def display():
     try:
         print("Loading Please wait....")
         for items in mycol.find():
-            print(items)
-            # for item in items:
-                # print(type(item))
-                # id1 = id,
-                # name1 = name,
-                # age1 = age,
-                # email_id1 = email_id
-                # print("id = " ,id1, "name = " ,name1, "age = " ,age1, "email_id = " ,email_id1,"\n")
+            id1 = items['_id']
+            name1 = items['name']
+            age1 = items['age']
+            email_id1 = items['email_id']
+            print("id = " ,id1, "name = " ,name1, "age = " ,age1, "email_id = " ,email_id1,"\n")
     except Exception as e:
         print("Exception occured", e)
 
