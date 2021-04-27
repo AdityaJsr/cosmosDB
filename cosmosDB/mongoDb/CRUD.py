@@ -1,70 +1,89 @@
 import pymongo
 from decouple import config
 
-client = pymongo.MongoClient(config("uri"))
+try:
 
-mydb = client[config("db")]
+    client = pymongo.MongoClient(config("uri"))
 
-mycol = mydb[config("mycol")]
+    mydb = client[config("db")]
 
+    mycol = mydb[config("mycol")]
+except Exception as e:
+    print("Could not connect to the database", e)
 # Insert data:
-def user_input():
-    id = input("Enter the unique id : ")
-    name = input("Enter the name of the person : ")
-    age = input("Enter the age of the person : ")
-    email_id = input("Enter the email_id of the person : ")
-    return(id,name,age,email_id)
 
+def user_input():
+    try:
+        id = input("Enter the unique id : ")
+        name = input("Enter the name of the person : ")
+        age = input("Enter the age of the person : ")
+        email_id = input("Enter the email_id of the person : ")
+        return(id,name,age,email_id)
+    except Exception as e:
+        print("Invalid inputs")
 def insert():
-    id, name , age, email_id,  = user_input()
-    names = {
-        "_id" : id,
-        "name" : name,
-        "age" : age,
-        "email_id" : email_id
-    }
-    mycol.insert_one(names)
-    
+    try:
+        id, name , age, email_id,  = user_input()
+        names = {
+            "_id" : id,
+            "name" : name,
+            "age" : age,
+            "email_id" : email_id
+        }
+        mycol.insert_one(names)
+    except Exception as e:
+        print("An exception has occured", e)
 
 def display():
-    print("Loading Please wait....")
-    for items in mycol.find():
-        print(items)
-        # for item in items:
-            # print(type(item))
-            # id1 = id,
-            # name1 = name,
-            # age1 = age,
-            # email_id1 = email_id
-            # print("id = " ,id1, "name = " ,name1, "age = " ,age1, "email_id = " ,email_id1,"\n")
+    try:
+        print("Loading Please wait....")
+        for items in mycol.find():
+            print(items)
+            # for item in items:
+                # print(type(item))
+                # id1 = id,
+                # name1 = name,
+                # age1 = age,
+                # email_id1 = email_id
+                # print("id = " ,id1, "name = " ,name1, "age = " ,age1, "email_id = " ,email_id1,"\n")
+    except Exception as e:
+        print("Exception occured", e)
 
 def delete():
-    email_id = input("Enter the email id of the user you want to remove : ")
-    query = { "email_id": email_id }
-    deleted_val=mycol.delete_one(query)
-    print(deleted_val.deleted_count, "Deleted document successfull")
+    try:
+        email_id = input("Enter the email id of the user you want to remove : ")
+        query = { "email_id": email_id }
+        deleted_val=mycol.delete_one(query)
+        print(deleted_val.deleted_count, "Deleted document successfull")
+    except Exception as e:
+        print("Exception occured as", e)
 
 def update():
-    email_id = input("Enter the email id of the user you want to update : ")
-    update = input("Enter the updated name : ")
-    query = { "email_id": email_id }
-    update_val ={"$set": { "name": update }}
-    mycol.update_one(query, update_val)
-    print(update_val, "Updated document successfull")
-
+    try:
+        email_id = input("Enter the email id of the user you want to update : ")
+        update = input("Enter the updated name : ")
+        query = { "email_id": email_id }
+        update_val ={"$set": { "name": update }}
+        mycol.update_one(query, update_val)
+        print(update_val, "Updated document successfull")
+    except Exception as e:
+        print("Exception occured as", e)
 def main():
-    ch = int(input("\nEnter the operation you want to perform \n1) Display data :\
-         \n2) Insert data : \n3) Delete data : \n4) Update data : \nEnter your choice here : "))
-    if ch == 1:
-        display()
-    elif ch == 2:
-        insert()
-    elif ch == 3:
-        delete()
-    elif ch == 4:
-        update()
-    else:
-        print("Enter a valid option : ")
+    try:
+        ch = int(input("\nEnter the operation you want to perform \n1) Display data :\
+            \n2) Insert data : \n3) Delete data : \n4) Update data : \nEnter your choice here : "))
+        if ch == 1:
+            display()
+        elif ch == 2:
+            insert()
+        elif ch == 3:
+            delete()
+        elif ch == 4:
+            update()
+        else:
+            print("Enter a valid option : ")
+    except Exception as e:
+        print("Exception occured as", e)
 
 if __name__ == "__main__":
     main()
