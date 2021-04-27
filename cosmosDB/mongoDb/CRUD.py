@@ -24,6 +24,7 @@ def insert():
         "email_id" : email_id
     }
     mycol.insert_one(names)
+    
 
 def display():
     print("Loading Please wait....")
@@ -37,13 +38,22 @@ def display():
             # email_id1 = email_id
             # print("id = " ,id1, "name = " ,name1, "age = " ,age1, "email_id = " ,email_id1,"\n")
 
+def delete():
+    email_id = input("Enter the email id of the user you want to remove : ")
+    query = { "email_id": email_id }
+    deleted_val=mycol.delete_one(query)
+    print(deleted_val.deleted_count, "deleted document successfull")
 
 def main():
-    ch = input("\nEnter the operation you want to perform \n1) Display data :  \n2) Insert data : \nEnter your choice here : ")
-    if ch == "1":
+    ch = int(input("\nEnter the operation you want to perform \n1) Display data :  \n2) Insert data : \n3) Delete data : \nEnter your choice here : "))
+    if ch == 1:
         display()
-    elif ch == "2":
+    elif ch == 2:
         insert()
+    elif ch == 3:
+        delete()
+    else:
+        print("Enter a valid option : ")
 
 if __name__ == "__main__":
     main()
