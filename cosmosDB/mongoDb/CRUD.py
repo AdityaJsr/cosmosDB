@@ -42,16 +42,27 @@ def delete():
     email_id = input("Enter the email id of the user you want to remove : ")
     query = { "email_id": email_id }
     deleted_val=mycol.delete_one(query)
-    print(deleted_val.deleted_count, "deleted document successfull")
+    print(deleted_val.deleted_count, "Deleted document successfull")
+
+def update():
+    email_id = input("Enter the email id of the user you want to update : ")
+    update = input("Enter the updated name : ")
+    query = { "email_id": email_id }
+    update_val ={"$set": { "name": update }}
+    mycol.update_one(query, update_val)
+    print(update_val, "Updated document successfull")
 
 def main():
-    ch = int(input("\nEnter the operation you want to perform \n1) Display data :  \n2) Insert data : \n3) Delete data : \nEnter your choice here : "))
+    ch = int(input("\nEnter the operation you want to perform \n1) Display data :\
+         \n2) Insert data : \n3) Delete data : \n4) Update data : \nEnter your choice here : "))
     if ch == 1:
         display()
     elif ch == 2:
         insert()
     elif ch == 3:
         delete()
+    elif ch == 4:
+        update()
     else:
         print("Enter a valid option : ")
 
