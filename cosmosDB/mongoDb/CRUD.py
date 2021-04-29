@@ -65,6 +65,17 @@ def update():
         print(update_val, "Updated document successfull")
     except Exception as e:
         print("Exception occured as", e)
+
+def find():
+    try:
+        email_id = input("Enter the email id of the user you want to find : ")
+        query = { "email_id": email_id }
+        mycol.find_one(query)
+        print("Updated document successfull")
+    except Exception as e:
+        print("Exception occured as", e)
+
+
 def main():
     try:
         ch = int(input("\nEnter the operation you want to perform \n1) Display data :\
@@ -77,6 +88,8 @@ def main():
             delete()
         elif ch == 4:
             update()
+        elif ch == 5:
+            find()
         else:
             print("Enter a valid option : ")
     except Exception as e:
