@@ -1,7 +1,7 @@
-CosmoDB
-Prerequisites
+<h1>CosmoDB<h1>
+<h2>Prerequisites<h2>
 
-Azure subscription
+<h4>Azure subscription
 create cosmo db account
 
 Go to the Azure portal to create an Azure Cosmos DB account. Search for and select Azure Cosmos DB.
@@ -35,4 +35,4 @@ Select the Author & Monitor tile to start the Azure Data Factory user interface 
 Reference:
 
 https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal
-https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-portal
+https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-portal<h4>
