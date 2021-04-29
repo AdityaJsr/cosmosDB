@@ -9,7 +9,11 @@ Modified time - 29 ‎April ‎2021‎
 import pymongo
 from decouple import config
 
-# Connection to azure mongodb API.
+'''
+Connection to azure mongodb API.
+Credentials kept in a secure .env file.
+'''
+
 try:
 
     client = pymongo.MongoClient(config("uri"))
