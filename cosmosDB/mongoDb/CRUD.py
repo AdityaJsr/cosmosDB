@@ -64,6 +64,7 @@ def insert():
             "email_id" : email_id
         }
         mycol.insert_one(names)
+        print("Inserted data for " + name + " In the databse" )
     except Exception as e:
         print("An exception has occured", e)
 
